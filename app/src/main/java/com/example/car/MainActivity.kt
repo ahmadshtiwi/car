@@ -39,6 +39,7 @@ class MainActivity : BaseActivity() {
     private lateinit var requestDataFilter: ArrayList<RequestData>
     private lateinit var requestDataCar: ArrayList<RequestData>
 
+
     private var p:Int=-1
     private lateinit var request: RequestData
     private lateinit var mRefAcceptedRequest: DatabaseReference
@@ -122,6 +123,34 @@ class MainActivity : BaseActivity() {
             }
         })
 
+        mRefCar.child(username).child(REQUEST).addValueEventListener(object :ValueEventListener
+        {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                requestDataCar.clear()
+                for (data in snapshot.children) {
+                    requestDataCar.add(data.getValue(RequestData::class.java)!!)
+                }
+
+
+                //requestDataFilter.clear()
+                for(index in 0 until requestData.size)
+                {
+                    if((requestDataCar[index].type_car==myCar||requestData[index].type_car=="both")&&status=="Available")
+                    {
+                        requestDataFilter.add(requestDataCar[index])
+                        mRefCar.child(username).child(STATUS).setValue("UnAvailable")
+
+                    }
+                }
+                val adapterRequest = AdapterRequest(baseContext, R.layout.view_notification_message, requestDataFilter)
+                grid_show_request.adapter = adapterRequest
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
 
 
     } //end onCreate
