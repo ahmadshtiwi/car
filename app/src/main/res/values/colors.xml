@@ -7,10 +7,15 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+
+    <!-- color app -->
     <color name="master">#b71c1c</color>
     <color name="dark_master">#7f0000</color>
+
     <color name="text1">#000</color>
     <color name="text2">#fff</color>
+
     <color name="bg_body">#EDEDEC</color>
 
     <color name="available">#04aa6d</color>
